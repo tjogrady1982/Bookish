@@ -13,7 +13,7 @@ namespace Bookish.DataAccess
         public int BookId { get; set; }
 
         public DateTime DateBorrowed { get; set; }
-        public DateTime DateDue { get; set; }
+        public DateTime DueDate { get; set; }
 
         public DateTime? DateReturned { get; set; }
 

@@ -48,7 +48,7 @@ namespace Bookish.ConsoleApp
                 Console.WriteLine(borrow.UserId);
                 Console.WriteLine(borrow.BookId);
                 Console.WriteLine(borrow.DateBorrowed);
-                Console.WriteLine(borrow.DateDue);
+                Console.WriteLine(borrow.DueDate);
                 Console.WriteLine(borrow.DateReturned);
             }
 
