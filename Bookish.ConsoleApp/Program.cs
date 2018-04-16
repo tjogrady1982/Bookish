@@ -34,7 +34,7 @@ namespace Bookish.ConsoleApp
 
             foreach (var user in users)
             {
-                Console.WriteLine(user.LoginName);
+                Console.WriteLine(user.EmailAddress);
                 Console.WriteLine(user.Password);
                 Console.WriteLine(user.FirstName);
                 Console.WriteLine(user.Surname);
