@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Bookish.DataAccess
+namespace Bookish.DataAccess.DataModels
 {
     public class Borrow
     {
@@ -16,6 +12,5 @@ namespace Bookish.DataAccess
         public DateTime DueDate { get; set; }
 
         public DateTime? DateReturned { get; set; }
-
     }
 }

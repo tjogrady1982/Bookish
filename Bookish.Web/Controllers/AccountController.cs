@@ -10,6 +10,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Bookish.Web.Models;
 using Bookish.DataAccess;
+using Bookish.DataAccess.Services;
 
 namespace Bookish.Web.Controllers
 {
@@ -158,7 +159,7 @@ namespace Bookish.Web.Controllers
                 {
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
 
-                    Bookish.DataAccess.Users.RegisterUser(model.Email, model.Password, model.FirstName, model.LastName);
+                    UserService.RegisterUser(model.Email, model.Password, model.FirstName, model.LastName);
                     
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link

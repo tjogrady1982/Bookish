@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Configuration;
 using Bookish.DataAccess;
+using Bookish.DataAccess.DataModels;
 using Dapper;
 
 
