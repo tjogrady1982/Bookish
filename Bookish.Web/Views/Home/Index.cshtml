@@ -1,24 +1,30 @@
 ﻿@using System.Web.UI.WebControls
-@model List<Bookish.DataAccess.DataModels.BookBorrows>
+@model Bookish.Web.Models.HomeViewModel
 @{
     ViewBag.Title = "Home Page";
 }
 
 <div class="jumbotron">
     <h1>Bookish</h1>
-    <p class="lead">Welcome to BOOKISH!!!</p>
+    <p class="lead">Welcome back @Model.FirstName</p>
 </div>
 
 <div class="row">
     <div class="col-md-4">
-        <h2>Getting started</h2>
+        <h2>@Model.FirstName, you are in possession of the following books: </h2>
         <p>
             Books and shit
         </p>
-        @foreach (var book in Model)
+        @foreach (var book in Model.Books)
         {
-            <div> Book: @book.Title</div>
+            <div> Title: @book.Title</div>
             <div>Date of Expected Return: @book.DueDate.ToShortDateString(); </div>
         }
+    </div>
+    
+    <div class="col-md-4">
+        <h2>@Html.ActionLink("Click here to view the library","Library","Home")</h2>
+        
+        
     </div>
 </div>

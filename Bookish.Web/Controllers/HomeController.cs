@@ -3,9 +3,11 @@ using System.Web;
 using System.Web.Mvc;
 using Bookish.DataAccess.DataModels;
 using Bookish.DataAccess.Services;
+using Bookish.Web.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
-
+using PagedList;
+ 
 namespace Bookish.Web.Controllers
 {
     public class HomeController : Controller
@@ -15,13 +17,25 @@ namespace Bookish.Web.Controllers
             var userManager = HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
             if (User.Identity.IsAuthenticated)
             {
-                var userBooks = BookService.BooksForUser(userManager.FindById(User.Identity.GetUserId()).Email);
-                return View(userBooks);
+                var userid = userManager.FindById(User.Identity.GetUserId()).Email;
+                var userBooks = BookService.BooksForUser(userid);
+                var usersFirstName = UserService.GetFirstName(userid);
+                return View(new HomeViewModel{
+
+                    Books = userBooks,
+                    FirstName = usersFirstName
+                });
+
             }
 
-            return View(new List<BookBorrows>());
+            return View(new HomeViewModel
+            {
+              Books = new List<BookBorrows>  ()
+            });
+
         }
 
+       
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
@@ -34,6 +48,12 @@ namespace Bookish.Web.Controllers
             ViewBag.Message = "Your contact page.";
 
             return View();
+        }
+        public ActionResult Library(int page = 1, int pagesize = 2)
+        {
+            var title = BookService.ListTitles();
+            PagedList<BookTitle> model = new PagedList<BookTitle>(title, page, pagesize);
+            return View(model);
         }
     }
 }

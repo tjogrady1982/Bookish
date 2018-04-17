@@ -31,5 +31,15 @@ namespace Bookish.DataAccess.Services
 
             return data;
         }
+
+        public static List<BookTitle> ListTitles()
+        {
+            var sqlString = "Select * from tblTitle order by Title";
+            IDbConnection db =
+                new SqlConnection(ConfigurationManager.ConnectionStrings["BookishConnection"].ConnectionString);
+
+            var data = db.Query<BookTitle>(sqlString).ToList();
+            return data;
+        }
     }
 }
