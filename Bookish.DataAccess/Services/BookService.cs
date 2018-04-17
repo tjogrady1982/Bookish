@@ -12,7 +12,7 @@ namespace Bookish.DataAccess.Services
     {
         public static List<BookTitle> BooksForUser(string userEmail)
         {
-            var sqlString = "select tblTitle.*from tblBorrow tbb " +
+            var sqlString = "select tblTitle.*, tblBorrow.DueDate from tblBorrow tbb " +
                 "join tblUsers tbu on tbb.UserID = tbu.UserID " +
                 "join tblBook on tbb.BookID = tblBook.BookID " +
                 "join tblTitle on tblBook.TitleID = tblTitle.TitleID " +
