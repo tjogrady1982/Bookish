@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataModels\Book.cs" />
+    <Compile Include="DataModels\BookBorrows.cs" />
     <Compile Include="DataModels\BookTitle.cs" />
     <Compile Include="DataModels\Borrow.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

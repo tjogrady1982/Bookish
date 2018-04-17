@@ -19,7 +19,7 @@ namespace Bookish.Web.Controllers
                 return View(userBooks);
             }
 
-            return View(new List<BookTitle>());
+            return View(new List<BookBorrows>());
         }
 
         public ActionResult About()
