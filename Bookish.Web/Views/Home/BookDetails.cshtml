@@ -13,9 +13,13 @@
                 <p> Due To Be Returned On: @title.DueDate.ToShortDateString()</p>
             </div>
             
+            
         </div>
     </div>
 
 }
+<div class="books">
+    @Html.ActionLink("Rent Copy","RentBook","Home", new {titleId = @Model.TitleId}, null)
+</div>
 
 

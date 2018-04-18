@@ -70,5 +70,19 @@ namespace Bookish.Web.Controllers
                 Borrowed = borrowed
             });
         }
+
+        public ActionResult RentBook(int titleId)
+        {
+            var userManager = HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            if (User.Identity.IsAuthenticated)
+            {
+                var bookId = BookService.GetBookId(titleId);
+                var userid = userManager.FindById(User.Identity.GetUserId()).Email;
+
+                BookService.BorrowBook(bookId,userid);
+            }
+
+            return View();
+        }
     }
 }

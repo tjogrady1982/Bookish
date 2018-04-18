@@ -11,6 +11,7 @@ namespace Bookish.Web.Models
         public int Copies { get; set; }
 
         public int TitleId { get; set; }
+
         public string EmailAddress { get; set; }
 
         public string Title { get; set; }
