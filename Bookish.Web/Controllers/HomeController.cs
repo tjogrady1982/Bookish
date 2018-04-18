@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Bookish.DataAccess.DataModels;
@@ -50,9 +51,14 @@ namespace Bookish.Web.Controllers
 
             return View();
         }
-        public ActionResult Library(int page = 1, int pagesize = 2)
+        public ActionResult Library(string searchstr, int page = 1, int pagesize = 2)
         {
             var title = BookService.ListTitles();
+
+            if (!String.IsNullOrEmpty(searchstr))
+            {
+                title = title.Where(s => s.Title.ToUpper().Contains(searchstr.ToUpper()) || s.Author.ToUpper().Contains(searchstr.ToUpper())).ToList();
+            }
             PagedList<BookTitle> model = new PagedList<BookTitle>(title, page, pagesize);
             return View(model);
         }
@@ -77,12 +83,26 @@ namespace Bookish.Web.Controllers
             if (User.Identity.IsAuthenticated)
             {
                 var bookId = BookService.GetBookId(titleId);
-                var userid = userManager.FindById(User.Identity.GetUserId()).Email;
 
-                BookService.BorrowBook(bookId,userid);
+                if (bookId == 0)
+                {
+                    return View(model:"No Available Copies");
+                }
+
+                else
+                {
+                    var userid = userManager.FindById(User.Identity.GetUserId()).Email;
+
+                    BookService.BorrowBook(bookId, userid);
+                    return View(model:"You've successfully rented");
+                }
+                
             }
 
-            return View();
+            else
+            {
+                return View(model:"You are not logged in");
+            }
         }
     }
 }

@@ -13,6 +13,16 @@
     }
 
 }
+<div>
+    @using (Html.BeginForm())
+    {
+        <p>
+            Find by name: @Html.TextBox("Searchstr")  
+            <input type="submit" value="Search" /></p>
+    }
+
+
+</div>
 
 <div>
 
