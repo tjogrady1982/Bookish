@@ -1,0 +1,21 @@
+﻿@model Bookish.Web.Models.BookViewModel
+
+<h2>Book Title: @Model.Title, Total Copies in Library @Model.Copies </h2>
+
+@foreach (var title in Model.Borrowed)
+{
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <p>Borrowed By: @title.EmailAddress</p>
+            </div>
+            <div class="col-md-3">
+                <p> Due To Be Returned On: @title.DueDate.ToShortDateString()</p>
+            </div>
+            
+        </div>
+    </div>
+
+}
+
+

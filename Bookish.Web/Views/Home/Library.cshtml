@@ -1,36 +1,52 @@
 ﻿
+@using Bookish.Web.Controllers
 @using PagedList.Mvc
 @model PagedList.PagedList<Bookish.DataAccess.DataModels.BookTitle>
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@functions{
 
+    protected void BookInfo_Click(object sender, EventArgs e)
+    {
 
-<div class="row">
-    <div class="col-md-4">
-        
-        @*@Html.PagedListPager(Model, page => Url.Action("ListTitles",
-            new { page, pageSize = Model.PageSize}))*@
-        @Html.PagedListPager(Model, page => Url.Action("Library",
-            new { page, pageSize = ViewBag.PageSize, currentFilter = ViewBag.CurrentFilter }))
+    }
 
-        @foreach (var title in Model)
-        {
-            <div class ="books">
-            <p> Title: @title.Title</p>
-            <p>Author: @title.Author </p>
-            <p>ISBN: @title.Isbn </p>
-                <br/>
+}
+
+<div>
+
+    @Html.PagedListPager(Model, page => Url.Action("Library",
+                  new { page, pageSize = ViewBag.PageSize, currentFilter = ViewBag.CurrentFilter }))
+
+    @foreach (var title in Model)
+    {
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <p>Title: @title.Title</p>
+                </div>
+                <div class="col-md-3">
+                    <p> Author: @title.Author</p>
+                </div>
+                <div class="col-md-3">
+                    <p>ISBN: @title.Isbn</p>
+                </div>
+                <div class="books">
+                    @*<button value ="@title.TitleId">More Info</button>*@
+                    @Html.ActionLink("More Info","BookDetails","Home", new {titleId = @title.TitleId, title = @title.Title}, null)
+                </div>
             </div>
-        }
-        
-        showing @Model.FirstItemOnPage to @Model.LastItemOnPage
-        of @Model.TotalItemCount Titles
-    </div>
-    
-    
-        
-        
-    </div>
+        </div>
+    }
+
+    showing @Model.FirstItemOnPage to @Model.LastItemOnPage
+    of @Model.TotalItemCount Titles
+</div>
+
+
+
+
+
 
 

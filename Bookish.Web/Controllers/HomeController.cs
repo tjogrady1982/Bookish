@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Web;
 using System.Web.Mvc;
 using Bookish.DataAccess.DataModels;
@@ -54,6 +55,20 @@ namespace Bookish.Web.Controllers
             var title = BookService.ListTitles();
             PagedList<BookTitle> model = new PagedList<BookTitle>(title, page, pagesize);
             return View(model);
+        }
+
+
+        public ActionResult BookDetails(int titleId, string title)
+        {
+            var copies = BookService.Copies(titleId);
+            var borrowed = BookService.BorrowedCopies(titleId);
+            return View(new BookViewModel
+            {
+                Title = title,
+                TitleId = titleId,
+                Copies = copies,
+                Borrowed = borrowed
+            });
         }
     }
 }
