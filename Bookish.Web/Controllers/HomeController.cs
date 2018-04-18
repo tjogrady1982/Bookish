@@ -77,7 +77,7 @@ namespace Bookish.Web.Controllers
             });
         }
 
-        public ActionResult RentBook(int titleId)
+        public ActionResult RentBook(int titleId, string titlename)
         {
             var userManager = HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
             if (User.Identity.IsAuthenticated)
@@ -86,7 +86,7 @@ namespace Bookish.Web.Controllers
 
                 if (bookId == 0)
                 {
-                    return View(model:"No Available Copies");
+                    return View(model:"No Available Copies of " + titlename);
                 }
 
                 else
@@ -94,7 +94,7 @@ namespace Bookish.Web.Controllers
                     var userid = userManager.FindById(User.Identity.GetUserId()).Email;
 
                     BookService.BorrowBook(bookId, userid);
-                    return View(model:"You've successfully rented");
+                    return View(model:"You've successfully rented: " + titlename);
                 }
                 
             }

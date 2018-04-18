@@ -19,7 +19,7 @@
 
 }
 <div class="books">
-    @Html.ActionLink("Rent Copy","RentBook","Home", new {titleId = @Model.TitleId}, null)
+    @Html.ActionLink("Rent Copy","RentBook","Home", new {titleId = @Model.TitleId, titlename = @Model.Title}, null)
 </div>
 
 
